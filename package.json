@@ -1,0 +1,30 @@
+{
+  "name": "homework_otus",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "engines": {
+    "node": ">=14.0.0",
+    "npm": ">=6.0.0"
+  },
+  "scripts": {
+    "start": "node ./src/index.js",
+    "read": "node ./src/read.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Studenov/homework-otus.git"
+  },
+  "author": "Roman Studenov",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Studenov/homework-otus/issues"
+  },
+  "homepage": "https://github.com/Studenov/homework-otus#readme",
+  "devDependencies": {
+    "prettier": "^2.2.1"
+  },
+  "dependencies": {
+    "commander": "^4.1.1"
+  }
+}
