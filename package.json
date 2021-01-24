@@ -8,8 +8,8 @@
     "npm": ">=6.0.0"
   },
   "scripts": {
-    "start": "node ./src/index.js",
-    "read": "node ./src/read.js"
+    "read:object": "node ./src/homework_1/object.js",
+    "read:directory": "node ./src/homework_1/directory.js"
   },
   "repository": {
     "type": "git",
