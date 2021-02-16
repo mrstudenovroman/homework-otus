@@ -9,7 +9,10 @@
   },
   "scripts": {
     "read:object": "node ./src/homework_1/object.js",
-    "read:directory": "node ./src/homework_1/directory.js"
+    "read:directory": "node ./src/homework_1/directory.js",
+    "sort:create": "node ./src/homework_2/createFile.js",
+    "sort:result": "node --max-old-space-size=50 ./src/homework_2/sort.js",
+    "sort:delete": "node ./src/homework_2/delete.js"
   },
   "repository": {
     "type": "git",
