@@ -2,17 +2,16 @@
   "name": "homework_otus",
   "version": "1.0.0",
   "description": "",
-  "main": "src/index.js",
   "engines": {
     "node": ">=14.0.0",
     "npm": ">=6.0.0"
   },
   "scripts": {
-    "read:object": "node ./src/homework_1/object.js",
-    "read:directory": "node ./src/homework_1/directory.js",
-    "sort:create": "node ./src/homework_2/createFile.js",
-    "sort:result": "node --max-old-space-size=50 ./src/homework_2/sort.js",
-    "sort:delete": "node ./src/homework_2/delete.js"
+    "read:object": "ts-node ./src/homework_1/object.ts",
+    "read:directory": "ts-node ./src/homework_1/directory.ts",
+    "sort:create": "ts-node ./src/homework_2/createFile.ts",
+    "sort:result": "node -r ts-node/register --max-old-space-size=3049 ./src/homework_2/sort.ts",
+    "sort:delete": "ts-node ./src/homework_2/delete.ts"
   },
   "repository": {
     "type": "git",
@@ -25,7 +24,14 @@
   },
   "homepage": "https://github.com/Studenov/homework-otus#readme",
   "devDependencies": {
-    "prettier": "^2.2.1"
+    "@types/express": "^4.17.11",
+    "@types/node": "^14.14.28",
+    "nodemon": "^2.0.7",
+    "prettier": "^2.2.1",
+    "ts-node": "^9.1.1",
+    "typescript": "^4.1.5"
   },
-  "dependencies": {}
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }

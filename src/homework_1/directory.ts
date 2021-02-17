@@ -1,22 +1,23 @@
-const fs = require('fs');
-const path = require('path');
+import fs from 'fs';
+import path from 'path';
 
 /* Обязательный аргумент передается просто ссылкой, например /home/roman/Документы/Git/Homework/ */
 /* Глубина передается, через опциональный флаг --depth или -d */
 
-const arguments = process.argv.slice(2);
-const pathToDir = arguments.find((elem) => !elem.includes('--depth=') || !elem.includes('-d='));
+const argv = process.argv.slice(2);
+const pathToDir = argv.find((elem) => !elem.includes('--depth=') || !elem.includes('-d='));
 
 if (!pathToDir) {
-  return console.error('🤯🤯🤯', '\x1b[31m', 'Не указан обязательный аргумент "путь до директории"');
+  throw console.error('🤯🤯🤯', '\x1b[31m', 'Не указан обязательный аргумент "путь до директории"');
 }
 
-const d = Number.parseInt(arguments.find((elem) => elem.includes('--depth=') || elem.includes('-d='))?.split('=')[1] || 0);
+const findDepth = argv.find((elem) => elem.includes('--depth=') || elem.includes('-d='))?.split('=')[1];
+const d = Number.parseInt(findDepth || '0');
 const depth = d < 0 || isNaN(d) ? 0 : d;
 
 const currentPath = path.resolve(pathToDir);
 
-function IterateTree(pathTree, number) {
+function IterateTree(pathTree: string, number: number) {
   let iterate = number;
 
   fs.readdirSync(pathTree).forEach((elem, index) => {

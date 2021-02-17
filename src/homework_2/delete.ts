@@ -1,5 +1,5 @@
-const fs = require('fs');
-const { PATH_TO_MAIN_FILE, PATH_TO_END_FILE, PATH_TO_CHUNK_FILE } = require('./constants');
+import fs from 'fs';
+import { PATH_TO_MAIN_FILE, PATH_TO_END_FILE, PATH_TO_CHUNK_FILE } from './constants';
 
 // Проверяем входящий файл, если есть удаляем
 if (fs.existsSync(PATH_TO_MAIN_FILE)) {

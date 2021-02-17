@@ -1,4 +1,4 @@
-const Merge = (arrFirst, arrSecond) => {
+const Merge = (arrFirst: Array<string>, arrSecond: Array<string>): Array<string> => {
   const arrSort = [];
   let i = 0;
   let j = 0;
@@ -11,10 +11,10 @@ const Merge = (arrFirst, arrSecond) => {
   return [...arrSort, ...arrFirst.slice(i), ...arrSecond.slice(j)];
 };
 
-const MergeSort = (arr) => {
+export const MergeSort = (arr: Array<string>): Array<string> => {
   // Проверяем корректность переданных данных
   if (!arr || !arr.length) {
-    return null;
+    return [];
   }
   //Если массив содержит один элемент просто возвращаем его
   if (arr.length <= 1) {
@@ -27,8 +27,4 @@ const MergeSort = (arr) => {
   // Для новых массивов снова вызываем сортировку,
   // сливаем их и возвращаем снова единый массив
   return Merge(MergeSort(arrLeft), MergeSort(arrRight));
-};
-
-module.exports = {
-  MergeSort,
 };
