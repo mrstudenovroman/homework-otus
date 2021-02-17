@@ -1,10 +1,9 @@
-const fs = require('fs');
-const { PATH_TO_MAIN_FILE, NUMBER_OF_DIGITS } = require('./constants');
+import fs from 'fs';
+import { PATH_TO_MAIN_FILE, NUMBER_OF_DIGITS } from './constants';
 
 // Проверяем существует ли файл, если да, то ничего не делаем
 if (fs.existsSync(PATH_TO_MAIN_FILE)) {
-  console.log('Данный файл уже существует!');
-  return;
+  throw console.log('Данный файл уже существует!');
 }
 
 const arr = [];

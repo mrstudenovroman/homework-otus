@@ -1,10 +1,11 @@
-const fs = require('fs');
-const { PATH_TO_MAIN_FILE, PATH_TO_CHUNK_FILE, HIGH_WATER_MARK } = require('./constants');
-const { MergeSort } = require('./utils');
+import fs from 'fs';
+
+import { PATH_TO_MAIN_FILE, PATH_TO_CHUNK_FILE, HIGH_WATER_MARK } from './constants';
+import { MergeSort } from './utils';
 
 // Проверяем существует ли основной файл, если нет выкидываем ошибку
 if (!fs.existsSync(PATH_TO_MAIN_FILE)) {
-  return console.error('🤯🤯🤯', '\x1b[31m', 'Файл не обнаружен! Пожалуйста запустите скрипт npm run sort:create чтобы создать файл!');
+  throw console.error('🤯🤯🤯', '\x1b[31m', 'Файл не обнаружен! Пожалуйста запустите скрипт npm run sort:create чтобы создать файл!');
 }
 
 const dirChunk = fs.existsSync(PATH_TO_CHUNK_FILE);
@@ -14,7 +15,7 @@ if (!dirChunk) {
   fs.mkdirSync(PATH_TO_CHUNK_FILE);
 }
 
-function PromiseChunk(resolve, reject) {
+function PromiseChunk(resolve: () => void, reject: (error: Error) => void): void {
   // Проверяем существует ли чанки в директории, если да, то ничего не делаем
   if (dirChunk && fs.readdirSync(PATH_TO_CHUNK_FILE, { encoding: 'utf-8' }).length !== 0) {
     console.log('Чанки уже существуют!');
@@ -26,7 +27,7 @@ function PromiseChunk(resolve, reject) {
   const readStream = fs.createReadStream(PATH_TO_MAIN_FILE, { encoding: 'utf8', highWaterMark: HIGH_WATER_MARK });
 
   // Читаем чанки из файла и распихиваем по файлам, предварительно отсортировав
-  readStream.on('data', (chunk) => {
+  readStream.on('data', (chunk: string) => {
     const numbersArr = chunk.split(' ');
     const sortedChunk = MergeSort(numbersArr).join(' ');
     const writeStream = fs.createWriteStream(`${PATH_TO_CHUNK_FILE}/chunk-${counter}.txt`);
@@ -46,11 +47,7 @@ function PromiseChunk(resolve, reject) {
   });
 }
 
-function CreateChunk() {
-  const promise = new Promise(PromiseChunk);
+export function CreateChunk() {
+  const promise = new Promise<void>(PromiseChunk);
   return promise;
 }
-
-module.exports = {
-  CreateChunk,
-};

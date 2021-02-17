@@ -31,18 +31,22 @@ const data = {
   ],
 };
 
-function IterateObject(obj, number) {
+type ElementNameType = 'name' | 'items';
+
+function IterateObject(obj: typeof data, number: number) {
   let iterate = number;
   Object.keys(obj).forEach((elem) => {
-    if (typeof obj[elem] === 'number') {
-      console.log('-'.repeat(iterate), obj[elem]);
+    const name = elem as ElementNameType;
+    if (typeof obj[name] === 'number') {
+      console.log('-'.repeat(iterate), obj[name]);
     }
 
-    if (typeof obj[elem] === 'object') {
-      if (Array.isArray(obj[elem])) {
+    if (typeof obj[name] === 'object') {
+      if (Array.isArray(obj[name])) {
         iterate = iterate + 1;
       }
-      IterateObject(obj[elem], iterate);
+      const object = obj[name] as any;
+      IterateObject(object, iterate);
     }
   });
 }
