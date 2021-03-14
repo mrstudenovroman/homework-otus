@@ -11,11 +11,13 @@ const config: webpack.Configuration = {
   output: {
     path: path.resolve(__dirname, 'src/homework_4/public/js'),
     filename: '[name].bundle.js',
+    publicPath: '/'
   },
   devServer: {
     contentBase: path.resolve(__dirname, 'src/homework_4/public'),
     hot: true,
-    port: 8080,
+    port: 3000,
+    historyApiFallback: true
   },
   resolve: {
     extensions: ['.ts', '.tsx', '.js'],

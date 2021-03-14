@@ -21,5 +21,5 @@ mongoose.connect(
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(cors({ origin: 'http://localhost:8080', optionsSuccessStatus: 200 }));
+app.use(cors({ origin: 'http://localhost:3000', optionsSuccessStatus: 200 }));
 app.use('/', AuthRoute);

@@ -1,14 +1,10 @@
 import { setUserToken } from '../utils/APIConfig';
 
-interface UserInterface {
-  name: string;
-  lastName: string;
-  token: string;
-}
 
 export function useAuth(): boolean {
-  const user: UserInterface | null = JSON.parse(`${localStorage.getItem('user')}`);
-  if (user === null) return false;
-  setUserToken(user.token);
+  const token: string | null = JSON.parse(`${localStorage.getItem('token')}`);
+  console.log(token)
+  if (token === null) return false;
+  setUserToken(token);
   return true;
 }

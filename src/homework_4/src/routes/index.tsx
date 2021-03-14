@@ -1,24 +1,24 @@
 import React, { FC, memo } from 'react';
-import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
-import { useAuth } from '../hooks/useAuth';
 import Dashboard from '../components/Dashboard';
-import Courses from '../components/Dashboard';
-import Course from '../components/Dashboard';
-import NotFound from '../components/Dashboard';
+import Courses from '../components/Courses';
+import Course from '../components/Course';
+import NotFound from '../components/NotFound';
 
 const Routes: FC = () => {
-  const auth = useAuth();
+  console.log('hello route');
+
   return (
-    <BrowserRouter>
+    <Router>
       <Switch>
         <Route exact path="/" component={Dashboard} />
-        <Route exact path="/courses" render={() => (auth ? <Courses /> : <Redirect to="/" />)} />
-        <Route exact path="/courses/:id" render={() => (auth ? <Course /> : <Redirect to="/" />)} />
+        <Route exact path="/courses" component={Courses} />
+        <Route path="/courses/:id" component={Course} />
         <Route path="*" component={NotFound} />
       </Switch>
-    </BrowserRouter>
-  );
+    </Router>
+  )
 };
 
 export default memo(Routes);

@@ -9,6 +9,7 @@ export const API = axios.create({
 });
 
 export const setUserToken = (token: string): void => {
+  localStorage.setItem('token', token);
   API.defaults.headers.common.Authorization = `JWT ${token}`;
 };
 export const clearUserToken = (): void => {

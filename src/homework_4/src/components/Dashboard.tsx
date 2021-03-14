@@ -1,5 +1,6 @@
-import React, { ChangeEvent, FC, memo, useCallback, useEffect, useState } from 'react';
+import React, { ChangeEvent, FC, memo, useCallback, useState } from 'react';
 import styled from 'styled-components';
+import { useHistory } from 'react-router-dom';
 import Container from '@material-ui/core/Container';
 import Box from '@material-ui/core/Box';
 import Paper from '@material-ui/core/Paper';
@@ -70,8 +71,7 @@ const BoxStyled = styled(Box)`
 const Dashboard: FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [loading, setLoading] = useState(false);
-  const [type, setType] = useState<ReasonAuthType>('signin');
+  const { push } = useHistory();
   const handleChangeEmail = useCallback((event: ChangeEvent<HTMLInputElement>) => setEmail(event.target.value), []);
   const handleChangePassword = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => setPassword(event.target.value),
@@ -79,26 +79,13 @@ const Dashboard: FC = () => {
   );
 
   const submitData = useCallback((reason: ReasonAuthType) => {
-    setType(reason);
-    setLoading(true);
-  }, []);
-
-  useEffect(() => {
-    if (loading) {
-      const getToken = async () => {
-        try {
-          const { token } = await AuthUser(email, password, type);
-          if (token) {
-            setUserToken(token);
-          }
-          setLoading(false);
-        } catch (error) {
-          setLoading(false);
-        }
-      };
-      getToken();
-    }
-  }, [loading, type, email, password]);
+    AuthUser(email, password, reason).then(({ token }) => {
+      if (token) {
+        setUserToken(token);
+        push('/courses');
+      }
+    })
+  }, [email, password, push]);
 
   return (
     <ContainerStyled maxWidth="md">
